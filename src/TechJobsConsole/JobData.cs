@@ -38,6 +38,29 @@ namespace TechJobsConsole
             return values;
         }
 
+        public static List<Dictionary<string, string>> FindByValue(string value)
+        {
+            // load data, if not already loaded
+            LoadData();
+
+            List<Dictionary<string, string>> jobs = new List<Dictionary<string, string>>();
+
+            foreach (Dictionary<string, string> row in AllJobs)
+            {
+                foreach(KeyValuePair<string, string> kpv in row)
+                {
+                    if (kpv.Value.ToLower().Contains(value.ToLower()))
+                    {
+                        if (!jobs.Contains(row))
+                            jobs.Add(row);
+                    }
+                }
+            }
+
+            return jobs;
+        }
+
+
         public static List<Dictionary<string, string>> FindByColumnAndValue(string column, string value)
         {
             // load data, if not already loaded
